@@ -59,6 +59,7 @@ type Meme implements RegEntry {
   challenge_challenger: User
   challenge_createdOn: String
   challenge_comment: String
+  challenge_metaHash: String
   challenge_votingToken: String
   challenge_rewardPool: Int
   challenge_commitPeriodEnd: String
