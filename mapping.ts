@@ -4,7 +4,7 @@
 /// <reference path="./dist/MemeRegistry.types.ts" />
 
 /** Contract Helpers */
-class MemeHelpers {
+class RegistryEntryHelpers {
   static parseRegistryEntry(regEntry: loadRegistryEntry__Result): Entity {
       let entity = new Entity()
       entity.setU256('regEntry_version', regEntry.value0)
@@ -27,7 +27,9 @@ class MemeHelpers {
     entity.setU256('challenge_claimedRewardOn', regEntryChallenge.value8)
     return entity
   }
+}
 
+class MemeHelpers {
   static parseMeme(meme: loadMeme__Result): Entity {
     let entity = new Entity()
 
@@ -35,6 +37,20 @@ class MemeHelpers {
     entity.setU256('meme_totalSupply', meme.value1)
     entity.setU256('meme_totalMinted', meme.value2)
     entity.setU256('meme_tokenIdStart', meme.value3)
+
+    return entity
+  }
+}
+
+class ParamChangeHelpers {
+  static parseParamChange(loadParamChange_Result): Entity {
+    let entity = new Entity()
+
+    entity.setAddress('paramChange_db', paramChange.value0)
+    entity.setString('paramChange_key', paramChange.value1)
+    entity.setU32('paramChange_valueType', paramChange.value2)
+    entity.setU256('paramChange_value', paramChange.value3)
+    entity.setU256('paramChange_appliedOn', paramChange.value4)
 
     return entity
   }
@@ -53,7 +69,7 @@ class EntityUtils {
   }
 }
 
-export function handleRegistryEntryEvent(event: EthereumEvent): void {
+export function handleMemeRegistryEntryEvent(event: EthereumEvent): void {
   // Extract event arguments
   let registryEntryAddress = event.params[0].value.toAddress()
   let eventType = event.params[1].value.toString()
@@ -71,9 +87,9 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
 
     // Create an entity to push into the database
     let meme = EntityUtils.extend(
-      MemeHelpers.parseRegistryEntry(registryEntryData),
+      RegistryEntryHelpers.parseRegistryEntry(registryEntryData),
       [
-        MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        RegistryEntryHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
         MemeHelpers.parseMeme(memeData)
       ]
     )
@@ -93,9 +109,9 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
     let memeData = memeContract.loadMeme()
 
     let meme = EntityUtils.extend(
-      MemeHelpers.parseRegistryEntry(registryEntryData),
+      RegistryEntryHelpers.parseRegistryEntry(registryEntryData),
       [
-        MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        RegistryEntryHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
         MemeHelpers.parseMeme(memeData)
       ]
     )
@@ -124,6 +140,63 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
     vote.setU256('vote_createdOn', timestamp)
 
     database.create('Vote', voteId, vote)
+  } else if (eventType === 'voteRevealed') {
+    return
+  } else if (eventType === 'challengeRewardClaimed') {
+    return
+  } else if (eventType === 'depositTransferred') {
+    return
+  } else if (eventType === 'minted') {
+    return
+  } else if (eventType === 'changeApplied') {
+    return
+  }
+}
+
+export function handleParamRegistryEntryEvent(event: EthereumEvent): void {
+  // Extract event arguments
+  let registryEntryAddress = event.params[0].value.toAddress()
+  let eventType = event.params[1].value.toString()
+  let timestamp = event.params[3].value.toU256()
+  let eventData = event.params[4].value.toArray()
+
+  if (eventType === 'constructed') {
+    let paramChangeContract = new ParamChange(registryEntryAddress, event.blockHash)
+    let registryEntryData = paramChangeContract.loadRegistryEntry()
+    let registryEntryChallengeData = paramChangeContract.loadRegistryEntryChallenge()
+    let paramChangeData = paramChangeContract.loadParamChange()
+
+    let paramChange = EntityUtils.extend(
+      RegistryEntryHelpers.parseRegistryEntry(registryEntryData),
+      [
+        RegistryEntryHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        ParamChangeHelpers.parseParamChange(paramChangeData)
+      ]
+    )
+
+    paramChange.setAddress('regEntry_address', registryEntryAddress)
+    paramChange.setU256('regEntry_createdOn', timestamp)
+
+    database.create('ParamChange', registryEntryAddress.toString(), paramChange)
+  } else if (eventType === 'challengeCreated') {
+    let paramChangeContract = new ParamChange(registryEntryAddress, event.blockHash)
+    let registryEntryData = paramChangeContract.loadRegistryEntry()
+    let registryEntryChallengeData = paramChangeContract.loadRegistryEntryChallenge()
+    let paramChangeData = paramChangeContract.loadParamChange()
+
+    let paramChange = EntityUtils.extend(
+      RegistryEntryHelpers.parseRegistryEntry(registryEntryData),
+      [
+        RegistryEntryHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        ParamChangeHelpers.parseParamChange(paramChangeData)
+      ]
+    )
+
+    paramChange.setAddress('regEntry_address', registryEntryAddress)
+    paramChange.setU256('challenge_createdOn', timestamp)
+
+    database.create('ParamChange', registryEntryAddress.toString(), paramChange)
+  } else if (eventType === 'voteCommitted') {
   } else if (eventType === 'voteRevealed') {
     return
   } else if (eventType === 'challengeRewardClaimed') {

@@ -141,6 +141,7 @@ type ParamChange implements RegEntry {
   paramChange_db: String
   paramChange_key: String
   paramChange_value: Int
+  paramChange_valueType: Int
   paramChange_originalValue: Int
   paramChange_appliedOn: String
 }
