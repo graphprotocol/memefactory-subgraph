@@ -27,6 +27,17 @@ class MemeHelpers {
     entity.setU256('challenge_claimedRewardOn', regEntryChallenge.value8)
     return entity
   }
+
+  static parseMeme(meme: loadMeme__Result): Entity {
+    let entity = new Entity()
+
+    entity.setBytes('meme_metaHash', meme.value0)
+    entity.setU256('meme_totalSupply', meme.value1)
+    entity.setU256('meme_totalMinted', meme.value2)
+    entity.setU256('meme_tokenIdStart', meme.value3)
+
+    return entity
+  }
 }
 
 /** Utils */
@@ -61,8 +72,13 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
     // Create an entity to push into the database
     let meme = EntityUtils.extend(
       MemeHelpers.parseRegistryEntry(registryEntryData),
-      [MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData)]
+      [
+        MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        MemeHelpers.parseMeme(memeData)
+      ]
     )
+
+
 
     meme.setAddress('regEntry_address', registryEntryAddress)
     meme.setU256('regEntry_createdOn', timestamp)
@@ -78,7 +94,10 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
 
     let meme = EntityUtils.extend(
       MemeHelpers.parseRegistryEntry(registryEntryData),
-      [MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData)]
+      [
+        MemeHelpers.parseRegistryEntryChallenge(registryEntryChallengeData),
+        MemeHelpers.parseMeme(memeData)
+      ]
     )
 
     meme.setAddress('regEntry_address', registryEntryAddress)
