@@ -17,7 +17,8 @@
     "url": "https://github.com/graphprotocol/memefactory/issues"
   },
   "homepage": "https://github.com/graphprotocol/memefactory#readme",
-  "devDependencies": {
-    "the-graph-wasm": "https://github.com/graphprotocol/the-graph-wasm.git"
+  "devDependencies": {},
+  "dependencies": {
+    "the-graph-wasm": "../the-graph-wasm/"
   }
 }
