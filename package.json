@@ -2,7 +2,6 @@
   "name": "memefactory-datasource",
   "version": "0.0.1",
   "description": "Graph Protocol data source for District0x's Meme Factory",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "codegen": "the-graph-wasm generate-types data-source.yaml",
@@ -12,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/graphprotocol/memefactory.git"
   },
-  "author": "",
+  "author": "Graph Protocol",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/graphprotocol/memefactory/issues"
