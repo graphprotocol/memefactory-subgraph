@@ -40,6 +40,7 @@ enum VoteOption {
 }
 
 type Vote {
+  vote_createdOn: String
   vote_secretHash: String
   vote_option: VoteOption
   vote_amount: Int

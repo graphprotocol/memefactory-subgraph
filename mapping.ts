@@ -7,6 +7,8 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
   // Extract event arguments
   let registryEntryAddress = event.params[0].value.toAddress()
   let eventType = event.params[1].value.toString()
+  let timestamp = event.params[3].value.toU256()
+  let eventData = event.params[4].value.toArray()
 
   if (eventType === 'constructed') {
     // Create an instance of the 'Meme' contract
@@ -35,7 +37,7 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
     meme.setU256('challenge_votesAgainst', registryEntryChallengeData.value7)
     meme.setU256('challenge_claimedRewardOn', registryEntryChallengeData.value8)
 
-    meme.setU256('regEntry_createdOn', event.params[3].value.toU256())
+    meme.setU256('regEntry_createdOn', timestamp)
 
     database.create('Meme', registryEntryAddress.toString(), meme)
 
@@ -63,12 +65,29 @@ export function handleRegistryEntryEvent(event: EthereumEvent): void {
     meme.setU256('challenge_votesAgainst', registryEntryChallengeData.value7)
     meme.setU256('challenge_claimedRewardOn', registryEntryChallengeData.value8)
 
-    meme.setU256('challenge_createdOn', event.params[3].value.toU256())
+    meme.setU256('challenge_createdOn', timestamp)
 
     database.update('Meme', registryEntryAddress.toString(), meme)
-    
+
   } else if (eventType === 'voteCommitted') {
-    return
+    let voterAddress = eventData[0].toAddress()
+    let memeContract = new Meme(registryEntryAddress, event.blockHash)
+    let voteData = memeContract.loadVote(voterAddress)
+    let vote = new Entity()
+    let voteId = registryEntryAddress.toString() + '-' + voterAddress.toString()
+
+    vote.setAddress('vote_voter', voterAddress)
+    vote.setAddress('regEntry_address', registryEntryAddress)
+
+    vote.setBytes32('vote_secretHash', voteData.value0)
+    vote.setU32('vote_option', voteData.value1)
+    vote.setU256('vote_amount', voteData.value2)
+    vote.setU256('vote_revealedOn', voteData.value3)
+    vote.setU256('vote_claimedRewardOn', voteData.value4)
+
+    vote.setU256('vote_createdOn', timestamp)
+
+    database.create('Vote', voteId, vote)
   } else if (eventType === 'voteRevealed') {
     return
   } else if (eventType === 'challengeRewardClaimed') {
