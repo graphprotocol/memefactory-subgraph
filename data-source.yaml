@@ -44,20 +44,20 @@ datasets:
       eventHandlers:
           # This event will be subscribed to and trigger the handler function
           # each time it is emitted.
-        - event: RegistryEntryEvent
+        - event: RegistryEntryEvent(address,bytes32,uint256,uint256,uint256[])
           # This is the name of the handler function that will be exported
           # by the WASM module.
           handler: handleMemeRegistryEntryEvent
       source:
         # Points to the AssemblyScript file, a module which should implement the mapping.
         # This should actually point to the built WASM output when deployed.
-        path: ./mapping.ts
+        path: ./mappings/meme.ts
   - data:
       kind: ethereum/contract
       name: ParamChangeRegistry
       address: "deAe237070F9587f8E7A266d06012c8cf97BEaD5"
       structure:
-        abi: MemeRegistry
+        abi: ParamChangeRegistry
     mapping:
       # Indicates that the mapping will be an event-driven.
       kind: ethereum/events
@@ -82,11 +82,11 @@ datasets:
       eventHandlers:
           # This event will be subscribed to and trigger the handler function
           # each time it is emitted.
-        - event: RegistryEntryEvent
+        - event: RegistryEntryEvent(address,bytes32,uint256,uint256,uint256[])
           # This is the name of the handler function that will be exported
           # by the WASM module.
           handler: handleParamRegistryEntryEvent
       source:
         # Points to the AssemblyScript file, a module which should implement the mapping.
         # This should actually point to the built WASM output when deployed.
-        path: ./mapping.ts
+        path: ./mappings/param-change.ts
