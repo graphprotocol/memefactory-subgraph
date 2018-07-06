@@ -1,4 +1,6 @@
 {
-  "extends": "./node_modules/the-graph-wasm/tsconfig.json",
-  "files": ["mapping.ts"]
+  "extend": "./node_modules/the-graph-wasm/tsconfig.json",
+  "compilerOptions": {
+    "types": ["the-graph-wasm"]
+  }
 }

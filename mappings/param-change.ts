@@ -1,8 +1,3 @@
-/// <reference path="../node_modules/assemblyscript/std/assembly.d.ts" />
-/// <reference path="../node_modules/the-graph-wasm/index.d.ts" />
-/// <reference path="../dist/ParamChangeRegistry/ParamChange.types.ts" />
-/// <reference path="../dist/ParamChangeRegistry/ParamChangeRegistry.types.ts" />
-
 /** Contract Helpers */
 class Helpers {
   static registryEntry(regEntry: ParamChange__loadRegistryEntryResult): Entity {
@@ -43,12 +38,10 @@ class Helpers {
   }
 }
 
-export function handleParamRegistryEntryEvent(event: EthereumEvent): void {
+export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
   // Extract event arguments
-  let registryEntryAddress = event.params[0].value.toAddress()
-  let eventType = event.params[1].value.toString(false)
-  let timestamp = event.params[3].value.toU256()
-  //let eventData = event.params[4].value.toArray()
+  let registryEntryAddress = event.registryEntry
+  let eventType = event.eventType.toString()
 
   if (eventType == 'constructed') {
     let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
@@ -63,7 +56,7 @@ export function handleParamRegistryEntryEvent(event: EthereumEvent): void {
 
     paramChange.setString('id', registryEntryAddress.toString())
     paramChange.setAddress('regEntry_address', registryEntryAddress)
-    paramChange.setU256('regEntry_createdOn', timestamp)
+    paramChange.setU256('regEntry_createdOn', event.timestamp)
 
     database.create('ParamChange', registryEntryAddress.toString(), paramChange)
   } else if (eventType == 'challengeCreated') {

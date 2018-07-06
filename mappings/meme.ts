@@ -1,8 +1,3 @@
-/// <reference path="../node_modules/assemblyscript/std/assembly.d.ts" />
-/// <reference path="../node_modules/the-graph-wasm/index.d.ts" />
-/// <reference path="../dist/MemeRegistry/Meme.types.ts" />
-/// <reference path="../dist/MemeRegistry/MemeRegistry.types.ts" />
-
 /** Contract Helpers */
 class Helpers {
   static registryEntry(regEntry: Meme__loadRegistryEntryResult): Entity {
@@ -40,12 +35,10 @@ class Helpers {
   }
 }
 
-export function handleMemeRegistryEntryEvent(event: EthereumEvent): void {
+export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
   // Extract event arguments
-  let registryEntryAddress = event.params[0].value.toAddress()
-  let eventType = event.params[1].value.toString(false)
-  let timestamp = event.params[3].value.toU256()
-  let eventData = event.params[4].value.toArray()
+  let registryEntryAddress = event.registryEntry
+  let eventType = event.eventType.toString(false)
 
   if (eventType == 'constructed') {
     // Create an instance of the 'Meme' contract
@@ -64,7 +57,7 @@ export function handleMemeRegistryEntryEvent(event: EthereumEvent): void {
 
     meme.setString('id', registryEntryAddress.toString())
     meme.setAddress('regEntry_address', registryEntryAddress)
-    meme.setU256('regEntry_createdOn', timestamp)
+    meme.setU256('regEntry_createdOn', event.timestamp)
 
     database.create('Meme', registryEntryAddress.toString(), meme)
   } else if (eventType == 'challengeCreated') {
@@ -80,7 +73,7 @@ export function handleMemeRegistryEntryEvent(event: EthereumEvent): void {
     //meme.setU256('challenge_createdOn', timestamp)
     //database.update('Meme', registryEntryAddress.toString(), meme)
   } else if (eventType == 'voteCommitted') {
-    //let voterAddress = eventData[0].toAddress()
+    //let voterAddress = event.data[0].toAddress()
     //let memeContract = Meme.bind(registryEntryAddress, event.blockHash)
     //let voteData = memeContract.loadVote(voterAddress)
     //let vote = new Entity()
