@@ -44,21 +44,18 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
   let eventType = event.eventType.toString()
 
   if (eventType == 'constructed') {
-    let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
-    let registryEntryData = paramChangeContract.loadRegistryEntry()
-    let registryEntryChallengeData = paramChangeContract.loadRegistryEntryChallenge()
-    let paramChangeData = paramChangeContract.loadParamChange()
-
-    let paramChange = Helpers.registryEntry(registryEntryData).merge([
-      Helpers.registryEntryChallenge(registryEntryChallengeData),
-      Helpers.paramChange(paramChangeData),
-    ])
-
-    paramChange.setString('id', registryEntryAddress.toString())
-    paramChange.setAddress('regEntry_address', registryEntryAddress)
-    paramChange.setU256('regEntry_createdOn', event.timestamp)
-
-    database.create('ParamChange', registryEntryAddress.toString(), paramChange)
+    //let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
+    //let paramChangeData = paramChangeContract.loadParamChange()
+    //let registryEntryData = paramChangeContract.loadRegistryEntry()
+    //let registryEntryChallengeData = paramChangeContract.loadRegistryEntryChallenge()
+    //let paramChange = Helpers.registryEntry(registryEntryData).merge([
+    //  Helpers.registryEntryChallenge(registryEntryChallengeData),
+    //  Helpers.paramChange(paramChangeData),
+    //])
+    //paramChange.setString('id', registryEntryAddress.toString())
+    //paramChange.setAddress('regEntry_address', registryEntryAddress)
+    //paramChange.setU256('regEntry_createdOn', event.timestamp)
+    //database.create('ParamChange', registryEntryAddress.toString(), paramChange)
   } else if (eventType == 'challengeCreated') {
     //let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
     //let registryEntryData = paramChangeContract.loadRegistryEntry()
