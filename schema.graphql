@@ -53,14 +53,17 @@ type Meme implements RegEntry {
   regEntry_address: ID
   regEntry_version: Int
   regEntry_status: RegEntryStatus
+  # Jannis: Source (we have the address but where do we get the user from?)
   regEntry_creator: User
   regEntry_deposit: Int
   regEntry_createdOn: String
   regEntry_challengePeriodEnd: String
   challenge_challenger: User
   challenge_createdOn: String
+  # Jannis: Source?
   challenge_comment: String
   challenge_metaHash: String
+  # Jannis: Source?
   challenge_votingToken: String
   challenge_rewardPool: Int
   challenge_commitPeriodEnd: String
@@ -69,19 +72,28 @@ type Meme implements RegEntry {
   challenge_votesAgainst: Int
   challenge_votesTotal: Int
   challenge_claimedRewardOn: String
-  challenge_vote(vote_voter: ID!): Vote
+  # Jannis: How to represent?
+  # challenge_vote(vote_voter: ID!): Vote
   # Balance of voting token of a voter. This is client-side only, server doesn't return this
-  challenge_availableVoteAmount(voter: ID!): Int
+  # Jannis: How to represent?
+  # challenge_availableVoteAmount(voter: ID!): Int
+  # Jannis: Source?
   meme_title: String
+  # Jannis: Source?
   meme_number: Int
   meme_metaHash: String
+  # Jannis: Source?
   meme_imageHash: String
   meme_totalSupply: Int
   meme_totalMinted: Int
   meme_tokenIdStart: Int
+  # Jannis: Source?
   meme_totalTradeVolume: Int
+  # Jannis: Source?
   meme_totalTradeVolumeRank: Int
-  meme_ownedMemeTokens(owner: String): [MemeToken]
+  # Jannis: How to represent?
+  # meme_ownedMemeTokens(owner: String): [MemeToken]
+  # Jannis: Source?
   meme_tags: [Tag]
 }
 
