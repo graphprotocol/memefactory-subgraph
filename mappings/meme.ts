@@ -4,7 +4,7 @@ class Helpers {
     let entity = new Entity()
     entity.setU32('regEntry_version', Token.fromU256(regEntry.value0).toU32())
     entity.setU32('regEntry_status', regEntry.value1)
-    entity.setAddress('regEntry_creator', regEntry.value2)
+    entity.setString('regEntry_creator', regEntry.value2.toHex())
     entity.setU32('regEntry_deposit', Token.fromU256(regEntry.value3).toU32())
     entity.setU256('regEntry_challengePeriodEnd', regEntry.value4)
     return entity
@@ -13,20 +13,19 @@ class Helpers {
   static registryEntryChallenge(
     regEntryChallenge: Meme__loadRegistryEntryChallengeResult
   ): Entity {
+    let votesFor = Token.fromU256(regEntryChallenge.value6).toU32()
+    let votesAgainst = Token.fromU256(regEntryChallenge.value7).toU32()
+    let rewardPool = Token.fromU256(regEntryChallenge.value2).toU32()
+
     let entity = new Entity()
     entity.setString('challenge_challenger', regEntryChallenge.value1.toHex())
-    entity.setU32(
-      'challenge_rewardPool',
-      Token.fromU256(regEntryChallenge.value2).toU32()
-    )
+    entity.setU32('challenge_rewardPool', rewardPool)
     entity.setBytes('challenge_metaHash', regEntryChallenge.value3)
     entity.setU256('challenge_commitPeriodEnd', regEntryChallenge.value4)
     entity.setU256('challenge_revealPeriodEnd', regEntryChallenge.value5)
-    entity.setU32('challenge_votesFor', Token.fromU256(regEntryChallenge.value6).toU32())
-    entity.setU32(
-      'challenge_votesAgainst',
-      Token.fromU256(regEntryChallenge.value7).toU32()
-    )
+    entity.setU32('challenge_votesFor', votesFor)
+    entity.setU32('challenge_votesAgainst', votesAgainst)
+    entity.setU32('challenge_votesTotal', votesFor + votesAgainst)
     entity.setU256('challenge_claimedRewardOn', regEntryChallenge.value8)
     return entity
   }
@@ -56,7 +55,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
 
   if (eventType == 'constructed') {
     // Create the meme creator
-    let creatorAddress = memeContract.creator()
+    let creatorAddress = entryData.value2
     let creator = new Entity()
     creator.setString('id', creatorAddress.toHex())
     creator.setString('user_address', creatorAddress.toHex())
@@ -70,12 +69,12 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     meme.setString('id', registryEntryAddress.toHex())
     meme.setAddress('regEntry_address', registryEntryAddress)
     meme.setU256('regEntry_createdOn', event.timestamp)
-    meme.setString('regEntry_creator', creatorAddress.toHex())
     database.create('Meme', registryEntryAddress.toHex(), meme)
   } else if (eventType == 'challengeCreated') {
     // Create challenger
     let challenger = new Entity()
     let challengerAddress = challengeData.value1
+    challenger.setString('id', challengerAddress.toHex())
     challenger.setAddress('user_address', challengerAddress)
     database.create('User', challengerAddress.toHex(), challenger)
 
@@ -94,6 +93,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
 
     // Create the voter
     let voter = new Entity()
+    voter.setString('id', voterAddress.toHex())
     voter.setAddress('user_address', voterAddress)
     database.create('User', voterAddress.toHex(), voter)
 
@@ -101,11 +101,12 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     let voteData = memeContract.loadVote(voterAddress)
     let voteId = registryEntryAddress.toHex() + '-' + voterAddress.toHex()
     let vote = new Entity()
+    vote.setString('id', voteId)
     vote.setString('vote_voter', voterAddress.toHex())
     vote.setAddress('regEntry_address', registryEntryAddress)
     vote.setString('vote_secretHash', voteData.value0.toHex())
     vote.setU32('vote_option', voteData.value1)
-    vote.setU256('vote_amount', voteData.value2)
+    vote.setU32('vote_amount', Token.fromU256(voteData.value2).toU32())
     vote.setU256('vote_revealedOn', voteData.value3)
     vote.setU256('vote_claimedRewardOn', voteData.value4)
     vote.setU256('vote_createdOn', event.timestamp)
@@ -132,10 +133,15 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     let meme = Helpers.registryEntryChallenge(challengeData)
     database.update('Meme', registryEntryAddress.toHex(), meme)
   } else if (eventType == 'depositTransferred') {
-    return
+    // Update the meme
+    let meme = Helpers.registryEntry(entryData)
+    database.update('Meme', registryEntryAddress.toHex(), meme)
   } else if (eventType == 'minted') {
-    return
-  } else if (eventType == 'changeApplied') {
-    return
+    // Update the meme
+    let meme = Helpers.registryEntry(entryData).merge([
+      Helpers.registryEntryChallenge(challengeData),
+      Helpers.meme(memeData),
+    ])
+    database.update('Meme', registryEntryAddress.toHex(), meme)
   }
 }
