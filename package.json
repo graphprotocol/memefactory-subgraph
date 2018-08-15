@@ -20,6 +20,6 @@
   "homepage": "https://github.com/graphprotocol/memefactory#readme",
   "devDependencies": {
     "ganache-cli": "^6.1.7",
-    "graph-cli": "../graph-cli/"
+    "graph-cli": "ssh://git@github.com:graphprotocol/graph-cli.git"
   }
 }
