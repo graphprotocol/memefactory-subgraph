@@ -1,9 +1,29 @@
 /** Contract Helpers */
 class Helpers {
+  static registryEntryStatus(n: u8): String {
+    return n == 0
+      ? 'regEntry_status_challengePeriod'
+      : n == 1
+        ? 'regEntry_status_commitPeriod'
+        : n == 2
+          ? 'regEntry_status_revealPeriod'
+          : n == 3
+            ? 'regEntry_status_blacklisted'
+            : 'regEntry_status_whitelisted'
+  }
+
+  static voteOption(n: u8): String {
+    return n == 0
+      ? 'voteOption_noVote'
+      : n == 1
+        ? 'voteOption_voteFor'
+        : 'voteOption_voteAgainst'
+  }
+
   static registryEntry(regEntry: Meme__loadRegistryEntryResult): Entity {
     let entity = new Entity()
     entity.setU256('regEntry_version', regEntry.value0)
-    entity.setInt('regEntry_status', regEntry.value1)
+    entity.setString('regEntry_status', Helpers.registryEntryStatus(regEntry.value1))
     entity.setString('regEntry_creator', regEntry.value2.toHex())
     entity.setU256('regEntry_deposit', regEntry.value3)
     entity.setU256('regEntry_challengePeriodEnd', regEntry.value4)
@@ -104,8 +124,8 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setString('id', voteId)
     vote.setString('vote_voter', voterAddress.toHex())
     vote.setAddress('regEntry_address', registryEntryAddress)
-    vote.setString('vote_secretHash', voteData.value0.toHex())
-    vote.setInt('vote_option', voteData.value1)
+    vote.setBytes('vote_secretHash', voteData.value0)
+    vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_amount', voteData.value2)
     vote.setU256('vote_revealedOn', voteData.value3)
     vote.setU256('vote_claimedRewardOn', voteData.value4)
@@ -121,7 +141,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     let voteId = registryEntryAddress.toHex() + '-' + voterAddress.toHex()
     let vote = new Entity()
     vote.setAddress('vote_voter', voterAddress)
-    vote.setInt('vote_option', voteData.value1)
+    vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_revealedOn', voteData.value3)
     store.set('Vote', voteId, vote)
 
