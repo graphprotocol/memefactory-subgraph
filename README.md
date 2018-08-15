@@ -7,6 +7,10 @@
 Like other subgraphs, the Meme Factory subgraph is built with
 
 ```sh
+# Once (installs dependencies)
+yarn
+
+# Each time you want to build
 yarn build-ipfs [--verbosity debug]
 ```
 
