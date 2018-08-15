@@ -24,7 +24,7 @@ dataSources:
           file: ./abis/MemeRegistry.json
       eventHandlers:
         - event: RegistryEntryEvent(address,bytes32,uint256,uint256,uint256[])
-          handler: handleRegistryEntryEvent
+          handler: handleMemeRegistryEntryEvent
       file: ./mappings/meme.ts
   - kind: ethereum/contract
     name: ParamChangeRegistry

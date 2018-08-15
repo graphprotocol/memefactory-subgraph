@@ -8,33 +8,35 @@ enum RegEntryStatus {
 
 interface RegEntry {
   id: ID!
-  regEntry_address: ID
-  regEntry_version: Int
+  regEntry_address: String
+  regEntry_version: BigInt
   regEntry_status: RegEntryStatus
   regEntry_creator: User
-  regEntry_deposit: Int
-  regEntry_createdOn: String
-  regEntry_challengePeriodEnd: String
+  regEntry_deposit: BigInt
+  regEntry_createdOn: BigInt
+  regEntry_challengePeriodEnd: BigInt
   challenge_challenger: User
-  challenge_createdOn: String
+  challenge_createdOn: BigInt
   challenge_comment: String
   # Jannis: Source?
   # challenge_votingToken: String
-  challenge_rewardPool: Int
-  challenge_commitPeriodEnd: String
-  challenge_revealPeriodEnd: String
-  challenge_votesFor: Int
-  challenge_votesAgainst: Int
-  challenge_votesTotal: Int
+  challenge_rewardPool: BigInt
+  challenge_commitPeriodEnd: BigInt
+  challenge_revealPeriodEnd: BigInt
+  challenge_votesFor: BigInt
+  challenge_votesAgainst: BigInt
+  challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
   # Jannis: How to represent?
   # challenge_votes: [ChallengeVotes]
 }
 
-type ChallengeVotes {
-  voter: ID
-  vote: ID
-}
+# Possible representation for challenge votes:
+#
+# type ChallengeVotes {
+#   voter: ID
+#   vote: ID
+# }
 
 enum VoteOption {
   voteOption_noVote
@@ -43,54 +45,54 @@ enum VoteOption {
 }
 
 type Vote {
-  vote_createdOn: String
-  vote_secretHash: String
+  id: ID!
+  vote_createdOn: BigInt
+  vote_secretHash: Bytes
   vote_option: VoteOption
-  vote_amount: Int
-  vote_revealedOn: String
-  vote_claimedRewardOn: String
+  vote_amount: BigInt
+  vote_revealedOn: BigInt
+  vote_claimedRewardOn: BigInt
   # Jannis: Source?
   # vote_reward: Int
 }
 
 type Meme implements RegEntry {
   id: ID!
-  regEntry_address: ID
-  regEntry_version: Int
+  regEntry_address: String
+  regEntry_version: BigInt
   regEntry_status: RegEntryStatus
   regEntry_creator: User
-  regEntry_deposit: Int
-  regEntry_createdOn: String
-  regEntry_challengePeriodEnd: String
+  regEntry_deposit: BigInt
+  regEntry_createdOn: BigInt
+  regEntry_challengePeriodEnd: BigInt
   challenge_challenger: User
-  challenge_createdOn: String
-  # Jannis: Source?
-  # challenge_comment: String
-  challenge_metaHash: String
+  challenge_createdOn: BigInt
+  challenge_comment: String
   # Jannis: Source?
   # challenge_votingToken: String
-  challenge_rewardPool: Int
-  challenge_commitPeriodEnd: String
-  challenge_revealPeriodEnd: String
-  challenge_votesFor: Int
-  challenge_votesAgainst: Int
-  challenge_votesTotal: Int
+  challenge_rewardPool: BigInt
+  challenge_commitPeriodEnd: BigInt
+  challenge_revealPeriodEnd: BigInt
+  challenge_votesFor: BigInt
+  challenge_votesAgainst: BigInt
+  challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
   # Jannis: How to represent?
-  # challenge_vote(vote_voter: ID!): Vote
-  # Balance of voting token of a voter. This is client-side only, server doesn't return this
+  # challenge_votes: [ChallengeVotes]
+
   # Jannis: How to represent?
-  # challenge_availableVoteAmount(voter: ID!): Int
+  # challenge_availableVoteAmount(voter: ID!): BigInt
+
   # Jannis: Source?
   # meme_title: String
   # Jannis: Source?
   # meme_number: Int
-  meme_metaHash: String
+  meme_metaHash: Bytes
   # Jannis: Source?
   # meme_imageHash: String
-  meme_totalSupply: Int
-  meme_totalMinted: Int
-  meme_tokenIdStart: Int
+  meme_totalSupply: BigInt
+  meme_totalMinted: BigInt
+  meme_tokenIdStart: BigInt
   # Jannis: Source?
   # meme_totalTradeVolume: Int
   # Jannis: Source?
@@ -101,60 +103,69 @@ type Meme implements RegEntry {
   # meme_tags: [Tag]
 }
 
-type Tag {
-  tag_id: ID
-  tag_name: String
-}
+# Possible representation for tags:
+#
+# type Tag {
+#   tag_id: ID
+#   tag_name: String
+# }
 
-type MemeToken {
-  memeToken_tokenId: ID
-  memeToken_number: Int
-  memeToken_owner: User
-  memeToken_meme: Meme
-}
+# Possible representation for meme tokens:
+#
+# type MemeToken {
+#   memeToken_tokenId: ID
+#   memeToken_number: Int
+#   memeToken_owner: User
+#   memeToken_meme: Meme
+# }
 
-enum MemeAuctionStatus {
-  memeAuction_status_active
-  memeAuction_status_canceled
-  memeAuction_status_done
-}
+# Possible representation for meme auction states:
+#
+# enum MemeAuctionStatus {
+#   memeAuction_status_active
+#   memeAuction_status_canceled
+#   memeAuction_status_done
+# }
 
-type MemeAuction {
-  memeAuction_address: ID
-  memeAuction_seller: User
-  memeAuction_buyer: User
-  memeAuction_startPrice: Int
-  memeAuction_endPrice: Int
-  memeAuction_duration: Int
-  memeAuction_startedOn: String
-  memeAuction_boughtOn: String
-  memeAuction_status: MemeAuctionStatus
-  memeAuction_memeToken: MemeToken
-}
+# Possible representation for meme auctions:
+#
+# type MemeAuction {
+#   memeAuction_address: ID
+#   memeAuction_seller: User
+#   memeAuction_buyer: User
+#   memeAuction_startPrice: Int
+#   memeAuction_endPrice: Int
+#   memeAuction_duration: Int
+#   memeAuction_startedOn: String
+#   memeAuction_boughtOn: String
+#   memeAuction_status: MemeAuctionStatus
+#   memeAuction_memeToken: MemeToken
+# }
 
 type ParamChange implements RegEntry {
   id: ID!
-  regEntry_address: ID
-  regEntry_version: Int
+  regEntry_address: String
+  regEntry_version: BigInt
   regEntry_status: RegEntryStatus
   regEntry_creator: User
-  regEntry_deposit: Int
-  regEntry_createdOn: String
-  regEntry_challengePeriodEnd: String
+  regEntry_deposit: BigInt
+  regEntry_createdOn: BigInt
+  regEntry_challengePeriodEnd: BigInt
   challenge_challenger: User
-  challenge_createdOn: String
+  challenge_createdOn: BigInt
   challenge_comment: String
-  challenge_votingToken: String
-  challenge_rewardPool: Int
-  challenge_commitPeriodEnd: String
-  challenge_revealPeriodEnd: String
-  challenge_votesFor: Int
-  challenge_votesAgainst: Int
-  challenge_votesTotal: Int
+  # Jannis: Source?
+  # challenge_votingToken: String
+  challenge_rewardPool: BigInt
+  challenge_commitPeriodEnd: BigInt
+  challenge_revealPeriodEnd: BigInt
+  challenge_votesFor: BigInt
+  challenge_votesAgainst: BigInt
+  challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
-  challenge_vote(vote_voter: ID!): Vote
-  # Balance of voting token of a voter. This is client-side only, server doesn't return this
-  challenge_availableVoteAmount(voter: ID!): Int
+  # Jannis: How to represent?
+  # challenge_votes: [ChallengeVotes]
+
   paramChange_db: String
   paramChange_key: String
   paramChange_value: Int
@@ -164,8 +175,10 @@ type ParamChange implements RegEntry {
 }
 
 type User {
+  id: ID!
   # Ethereum address of an user
-  user_address: ID
+  user_address: ID!
+
   # Jannis: Source for all fields below?
   ## Total number of memes submitted by user
   #user_totalCreatedMemes: Int
