@@ -35,9 +35,9 @@ asn1.js@^5.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
 
-"assemblyscript@https://github.com/AssemblyScript/assemblyscript/":
+"assemblyscript@https://github.com/AssemblyScript/assemblyscript#c4ebc8c291c1068da73ddf1a381eab93e1f69e11":
   version "0.5.0"
-  resolved "https://github.com/AssemblyScript/assemblyscript/#c4ebc8c291c1068da73ddf1a381eab93e1f69e11"
+  resolved "https://github.com/AssemblyScript/assemblyscript#c4ebc8c291c1068da73ddf1a381eab93e1f69e11"
   dependencies:
     "@protobufjs/utf8" "^1.1.0"
     binaryen "48.0.0-nightly.20180627"
@@ -131,7 +131,7 @@ browserify-aes@^1.0.6, browserify-aes@^1.1.1, browserify-aes@^1.2.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-bs58@^4.0.1:
+bs58@4.0.1, bs58@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/bs58/-/bs58-4.0.1.tgz#be161e76c354f6f788ae4071f63f34e8c4f0a42a"
   dependencies:
@@ -153,8 +153,8 @@ buffer-fill@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-fill/-/buffer-fill-1.0.0.tgz#f8f78b76789888ef39f205cd637f68e702122b2c"
 
 buffer-from@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.0.tgz#87fcaa3a298358e0ade6e442cfce840740d1ad04"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
 
 buffer-loader@~0.0.1:
   version "0.0.1"
@@ -176,7 +176,7 @@ chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-cids@^0.5.3, cids@~0.5.1, cids@~0.5.2, cids@~0.5.3:
+cids@0.5.3, cids@^0.5.3, cids@~0.5.2, cids@~0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/cids/-/cids-0.5.3.tgz#9a25b697eb76faf807afcec35c4ab936edfbd0a4"
   dependencies:
@@ -195,11 +195,7 @@ class-is@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/class-is/-/class-is-1.1.0.tgz#9d3c0fba0440d211d843cec3dedfa48055005825"
 
-color-convert@^0.5.0:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
-
-color-convert@^1.9.0:
+color-convert@^1.9.0, color-convert@^1.9.1:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.2.tgz#49881b8fba67df12a96bdf3f56c0aab9e7913147"
   dependencies:
@@ -213,37 +209,38 @@ color-name@^1.0.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-color-string@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-0.3.0.tgz#27d46fb67025c5c2fa25993bfbf579e47841b991"
+color-string@^1.5.2:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
   dependencies:
     color-name "^1.0.0"
+    simple-swizzle "^0.2.2"
 
-color@0.8.x:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/color/-/color-0.8.0.tgz#890c07c3fd4e649537638911cf691e5458b6fca5"
+color@3.0.x:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/color/-/color-3.0.0.tgz#d920b4328d534a3ac8295d68f7bd4ba6c427be9a"
   dependencies:
-    color-convert "^0.5.0"
-    color-string "^0.3.0"
+    color-convert "^1.9.1"
+    color-string "^1.5.2"
 
-colornames@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/colornames/-/colornames-0.0.2.tgz#d811fd6c84f59029499a8ac4436202935b92be31"
+colornames@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/colornames/-/colornames-1.1.1.tgz#f8889030685c7c4ff9e2a559f5077eb76a816f96"
 
 colors@^1.2.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/colors/-/colors-1.3.0.tgz#5f20c9fef6945cb1134260aab33bfbdc8295e04e"
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.3.1.tgz#4accdb89cf2cabc7f982771925e9468784f32f3d"
 
-colorspace@1.0.x:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/colorspace/-/colorspace-1.0.1.tgz#c99c796ed31128b9876a52e1ee5ee03a4a719749"
+colorspace@1.1.x:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/colorspace/-/colorspace-1.1.1.tgz#9ac2491e1bc6f8fb690e2176814f8d091636d972"
   dependencies:
-    color "0.8.x"
-    text-hex "0.0.x"
+    color "3.0.x"
+    text-hex "1.0.x"
 
 commander@^2.15.0, commander@^2.15.1:
-  version "2.16.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -298,12 +295,12 @@ detect-node@^2.0.3:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
 
 diagnostics@^1.0.1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/diagnostics/-/diagnostics-1.1.0.tgz#e1090900b49523e8527be20f081275205f2ae36a"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/diagnostics/-/diagnostics-1.1.1.tgz#cab6ac33df70c9d9a727490ae43ac995a769b22a"
   dependencies:
-    colorspace "1.0.x"
+    colorspace "1.1.x"
     enabled "1.0.x"
-    kuler "0.0.x"
+    kuler "1.0.x"
 
 drbg.js@^1.0.1:
   version "1.0.1"
@@ -314,8 +311,8 @@ drbg.js@^1.0.1:
     create-hmac "^1.1.4"
 
 elliptic@^6.2.3:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.0.tgz#cac9af8762c85836187003c8dfe193e5e2eae5df"
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.1.tgz#c2d0b7776911b86722c632c3c06c60f2f819939a"
   dependencies:
     bn.js "^4.4.0"
     brorand "^1.0.1"
@@ -346,8 +343,8 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
 esprima@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
 
 evp_bytestokey@^1.0.3:
   version "1.0.3"
@@ -357,8 +354,8 @@ evp_bytestokey@^1.0.3:
     safe-buffer "^5.1.1"
 
 fast-safe-stringify@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.4.tgz#4fe828718aa61dbcf9119c3c24e79cc4dea973b2"
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.5.tgz#cdb2d02d41329afbe67eff073598811d482609e3"
 
 fecha@^2.3.3:
   version "2.3.3"
@@ -384,6 +381,12 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+ganache-cli@^6.1.7:
+  version "6.1.7"
+  resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.1.7.tgz#9298305a427cf79edf46f063bf38f122e76de839"
+  dependencies:
+    source-map-support "^0.5.3"
+
 glob@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
@@ -399,6 +402,21 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
+graph-cli@../graph-cli/:
+  version "0.1.0"
+  dependencies:
+    assemblyscript "https://github.com/AssemblyScript/assemblyscript#c4ebc8c291c1068da73ddf1a381eab93e1f69e11"
+    chalk "^2.4.1"
+    commander "^2.15.1"
+    debug "^3.1.0"
+    fs-extra "^6.0.1"
+    glob "^7.1.2"
+    immutable "^3.8.2"
+    ipfs-api "^22.2.1"
+    js-yaml "^3.12.0"
+    prettier "^1.13.5"
+    winston "^3.0.0"
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -411,11 +429,11 @@ hash-base@^3.0.0:
     safe-buffer "^5.0.1"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.4.tgz#8b50e1f35d51bd01e5ed9ece4dbe3549ccfa0a3c"
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.5.tgz#e38ab4b85dfb1e0c40fe9265c0e9b54854c23812"
   dependencies:
     inherits "^2.0.3"
-    minimalistic-assert "^1.0.0"
+    minimalistic-assert "^1.0.1"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -461,22 +479,23 @@ ip@^1.1.5:
   resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
 
 ipfs-api@^22.2.1:
-  version "22.2.2"
-  resolved "https://registry.yarnpkg.com/ipfs-api/-/ipfs-api-22.2.2.tgz#ace545fe9a6d958bd8e7b142e30f85c11a025dd6"
+  version "22.3.0"
+  resolved "https://registry.yarnpkg.com/ipfs-api/-/ipfs-api-22.3.0.tgz#29935c5d9ca533cefef62288e00a8b7eab412ab7"
   dependencies:
     async "^2.6.1"
     big.js "^5.1.2"
     bs58 "^4.0.1"
     cids "~0.5.3"
     concat-stream "^1.6.2"
+    debug "^3.1.0"
     detect-node "^2.0.3"
     flatmap "0.0.3"
     glob "^7.1.2"
     ipfs-block "~0.7.1"
     ipfs-unixfs "~0.1.15"
     ipld-dag-cbor "~0.12.1"
-    ipld-dag-pb "~0.14.5"
-    is-ipfs "~0.3.2"
+    ipld-dag-pb "~0.14.6"
+    is-ipfs "~0.4.2"
     is-pull-stream "0.0.0"
     is-stream "^1.1.0"
     libp2p-crypto "~0.13.0"
@@ -526,34 +545,38 @@ ipld-dag-cbor@~0.12.1:
     multihashing-async "~0.5.1"
     traverse "~0.6.6"
 
-ipld-dag-pb@~0.14.5:
-  version "0.14.5"
-  resolved "https://registry.yarnpkg.com/ipld-dag-pb/-/ipld-dag-pb-0.14.5.tgz#bec6417401b32a80818190636a08edc0048dccec"
+ipld-dag-pb@~0.14.6:
+  version "0.14.8"
+  resolved "https://registry.yarnpkg.com/ipld-dag-pb/-/ipld-dag-pb-0.14.8.tgz#6142f8535928d4c8e935cde629f9a53eed0b20f0"
   dependencies:
     async "^2.6.1"
     bs58 "^4.0.1"
     buffer-loader "~0.0.1"
     cids "~0.5.3"
     class-is "^1.1.0"
-    is-ipfs "~0.3.2"
-    multihashes "~0.4.13"
+    is-ipfs "~0.4.2"
     multihashing-async "~0.5.1"
     protons "^1.0.1"
     pull-stream "^3.6.8"
     pull-traverse "^1.0.3"
     stable "~0.1.8"
 
+is-arrayish@^0.3.1:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03"
+
 is-circular@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-circular/-/is-circular-1.0.2.tgz#2e0ab4e9835f4c6b0ea2b9855a84acd501b8366c"
 
-is-ipfs@~0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/is-ipfs/-/is-ipfs-0.3.2.tgz#c4650b838e36fd0151de5896b2ff319fe8936182"
+is-ipfs@~0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/is-ipfs/-/is-ipfs-0.4.2.tgz#06a858769cbfdac39a3e0ed1ca157e3f3fcc84fc"
   dependencies:
-    bs58 "^4.0.1"
-    cids "~0.5.1"
-    multihashes "~0.4.9"
+    bs58 "4.0.1"
+    cids "0.5.3"
+    multibase "0.4.0"
+    multihashes "0.4.13"
 
 is-promise@~1, is-promise@~1.0.0:
   version "1.0.1"
@@ -606,11 +629,11 @@ keypair@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/keypair/-/keypair-1.0.1.tgz#7603719270afb6564ed38a22087a06fc9aa4ea1b"
 
-kuler@0.0.x:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/kuler/-/kuler-0.0.0.tgz#b66bb46b934e550f59d818848e0abba4f7f5553c"
+kuler@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/kuler/-/kuler-1.0.0.tgz#904ad31c373b781695854d32be33818bf1d60250"
   dependencies:
-    colornames "0.0.2"
+    colornames "^1.1.1"
 
 libp2p-crypto-secp256k1@~0.2.2:
   version "0.2.2"
@@ -732,7 +755,7 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-minimalistic-assert@^1.0.0:
+minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
 
@@ -784,7 +807,7 @@ multiaddr@^5.0.0:
     varint "^5.0.0"
     xtend "^4.0.1"
 
-multibase@~0.4.0:
+multibase@0.4.0, multibase@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/multibase/-/multibase-0.4.0.tgz#1bdb62c82de0114f822a1d8751bcbee91cd2efba"
   dependencies:
@@ -796,9 +819,16 @@ multicodec@~0.2.6:
   dependencies:
     varint "^5.0.0"
 
-multihashes@~0.4.12, multihashes@~0.4.13, multihashes@~0.4.9:
+multihashes@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/multihashes/-/multihashes-0.4.13.tgz#d10bd71bd51d24aa894e2a6f1457146bb7bac125"
+  dependencies:
+    bs58 "^4.0.1"
+    varint "^5.0.0"
+
+multihashes@~0.4.12, multihashes@~0.4.13:
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/multihashes/-/multihashes-0.4.14.tgz#774db9a161f81a8a27dc60788f91248e020f5244"
   dependencies:
     bs58 "^4.0.1"
     varint "^5.0.0"
@@ -843,8 +873,8 @@ ndjson@^1.5.0:
     through2 "^2.0.3"
 
 node-forge@^0.7.1, node-forge@^0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.5.tgz#6c152c345ce11c52f465c2abd957e8639cd674df"
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.6.tgz#fdf3b418aee1f94f0ef642cd63486c77ca9724ac"
 
 nodeify@^1.0.1:
   version "1.0.1"
@@ -911,8 +941,8 @@ pem-jwk@^1.5.1:
     asn1.js "1.0.3"
 
 prettier@^1.13.5:
-  version "1.13.7"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
 
 process-nextick-args@~2.0.0:
   version "2.0.0"
@@ -946,8 +976,8 @@ pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 pull-defer@~0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/pull-defer/-/pull-defer-0.2.2.tgz#0887b0ffb30af32a56dbecfa72c1672271f07b13"
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/pull-defer/-/pull-defer-0.2.3.tgz#4ee09c6d9e227bede9938db80391c3dac489d113"
 
 pull-pushable@^2.2.0:
   version "2.2.0"
@@ -1038,6 +1068,23 @@ signed-varint@^2.0.1:
   dependencies:
     varint "~5.0.0"
 
+simple-swizzle@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
+  dependencies:
+    is-arrayish "^0.3.1"
+
+source-map-support@^0.5.3:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.8.tgz#04f5581713a8a65612d0175fbf3a01f80a162613"
+  dependencies:
+    buffer-from "^1.0.0"
+    source-map "^0.6.0"
+
+source-map@^0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+
 split2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/split2/-/split2-2.2.0.tgz#186b2575bcf83e85b7d18465756238ee4ee42493"
@@ -1105,24 +1152,9 @@ tar-stream@^1.6.1:
     to-buffer "^1.1.0"
     xtend "^4.0.0"
 
-text-hex@0.0.x:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/text-hex/-/text-hex-0.0.0.tgz#578fbc85a6a92636e42dd17b41d0218cce9eb2b3"
-
-the-graph-wasm@../the-graph-wasm/:
-  version "0.1.0"
-  dependencies:
-    assemblyscript "https://github.com/AssemblyScript/assemblyscript/"
-    chalk "^2.4.1"
-    commander "^2.15.1"
-    debug "^3.1.0"
-    fs-extra "^6.0.1"
-    glob "^7.1.2"
-    immutable "^3.8.2"
-    ipfs-api "^22.2.1"
-    js-yaml "^3.12.0"
-    prettier "^1.13.5"
-    winston "^3.0.0"
+text-hex@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-hex/-/text-hex-1.0.0.tgz#69dc9c1b17446ee79a92bf5b884bb4b9127506f5"
 
 through2@^2.0.2, through2@^2.0.3:
   version "2.0.3"

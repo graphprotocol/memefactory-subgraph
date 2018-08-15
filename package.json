@@ -1,11 +1,12 @@
 {
-  "name": "memefactory-datasource",
+  "name": "memefactory-subgraph",
   "version": "0.0.1",
-  "description": "Graph Protocol data source for District0x's Meme Factory",
+  "description": "MemeFactory subgraph for The Graph",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "codegen": "the-graph-wasm generate-types data-source.yaml",
-    "build": "the-graph-wasm compile data-source.yaml"
+    "codegen": "graph codegen subgraph.yaml",
+    "build": "graph build subgraph.yaml",
+    "build-ipfs": "graph build --ipfs /ip4/127.0.0.1/tcp/5001 subgraph.yaml",
+    "testnet": "ganache-cli -p 8546 --db ganache-db"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,8 @@
     "url": "https://github.com/graphprotocol/memefactory/issues"
   },
   "homepage": "https://github.com/graphprotocol/memefactory#readme",
-  "devDependencies": {},
-  "dependencies": {
-    "the-graph-wasm": "../the-graph-wasm/"
+  "devDependencies": {
+    "ganache-cli": "^6.1.7",
+    "graph-cli": "../graph-cli/"
   }
 }

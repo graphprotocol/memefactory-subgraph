@@ -40,8 +40,8 @@ class Helpers {
 
 export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
   // Extract event arguments
-  let registryEntryAddress = event.registryEntry
-  let eventType = event.eventType.toString()
+  let registryEntryAddress = event.params.registryEntry
+  let eventType = event.params.eventType.toString()
 
   if (eventType == 'constructed') {
     //let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
