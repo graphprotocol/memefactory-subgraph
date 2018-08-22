@@ -50,8 +50,92 @@ graph-node                             \
 3. Identify missing features
 4. Share and discuss schema and the subgraph in general with the District0x team
 
-### Missing features already identified
+## Missing features already identified
 
 - GraphQL interfaces
 - `BigInt` math (required for adding votes for and votes against in challenges)
 - Aggregation / counting
+
+## Reference
+
+This subgraph manifest is based on the following MemeFactory resources:
+
+* [Contracts](https://github.com/district0x/memefactory/tree/master/resources/public/contracts/src)
+* [GraphQL schema](https://github.com/district0x/memefactory/blob/master/src/memefactory/shared/graphql_schema.cljs)
+* [Syncer with event processing](https://github.com/district0x/memefactory/blob/master/src/memefactory/server/syncer.cljs)
+
+## Useful GraphQL queries
+
+```graphql
+{
+  users {
+    id
+    user_address
+  }
+  memes {
+    id
+    regEntry_address
+    regEntry_status
+    regEntry_version
+    regEntry_creator {
+      id
+      user_address
+    }
+    regEntry_deposit
+    regEntry_createdOn
+    regEntry_challengePeriodEnd
+    challenge_comment
+    challenge_votesFor
+    challenge_createdOn
+    challenge_challenger {
+      id
+      user_address
+    }
+    challenge_rewardPool
+    challenge_votesTotal
+    challenge_votesAgainst
+    challenge_commitPeriodEnd
+    challenge_claimedRewardOn
+    challenge_revealPeriodEnd
+  }
+  votes {
+    id
+    vote_option
+    vote_amount
+    vote_createdOn
+    vote_secretHash
+    vote_revealedOn
+    vote_claimedRewardOn
+  }
+  paramChanges {
+    id
+    regEntry_address
+    regEntry_status
+    regEntry_version
+    regEntry_creator {
+      id
+      user_address
+    }
+    regEntry_deposit
+    regEntry_createdOn
+    regEntry_challengePeriodEnd
+    challenge_comment
+    challenge_votesFor
+    challenge_createdOn
+    challenge_challenger {
+      id
+      user_address
+    }
+    challenge_rewardPool
+    challenge_votesTotal
+    challenge_votesAgainst
+    challenge_commitPeriodEnd
+    challenge_claimedRewardOn
+    challenge_revealPeriodEnd
+  }
+  users {
+    id
+    user_address
+  }
+}
+```
