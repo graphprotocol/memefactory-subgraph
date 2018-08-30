@@ -64,6 +64,7 @@ type MemeVote {
   vote_amount: BigInt
   vote_revealedOn: BigInt
   vote_claimedRewardOn: BigInt
+  vote_meme: String
 
 }
 
@@ -98,8 +99,7 @@ type Meme implements RegEntry {
   challenge_votesAgainst: BigInt
   challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
-  # Jannis: How to represent?
-  # challenge_votes: [ChallengeVotes]
+  challenge_votes: @derivedFrom(field: "vote_meme")
 
   # Jannis: How to represent?
   # challenge_availableVoteAmount(voter: ID!): BigInt

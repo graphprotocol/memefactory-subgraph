@@ -130,6 +130,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setU256('vote_revealedOn', voteData.value3)
     vote.setU256('vote_claimedRewardOn', voteData.value4)
     vote.setU256('vote_createdOn', event.params.timestamp)
+    vote.setString('vote_meme', registryEntryAddress.toHex())
     store.set('MemeVote', voteId, vote)
   } else if (eventType == 'voteRevealed') {
     // Obtain the voter address
@@ -143,6 +144,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setAddress('vote_voter', voterAddress)
     vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_revealedOn', voteData.value3)
+    vote.setString('vote_meme', registryEntryAddress.toHex())
     store.set('MemeVote', voteId, vote)
 
     // Update the meme
