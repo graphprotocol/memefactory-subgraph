@@ -10,6 +10,14 @@ class Helpers {
     return entity
   }
 
+  static voteOption(n: u8): String {
+    return n == 0
+      ? 'voteOption_noVote'
+      : n == 1
+        ? 'voteOption_voteFor'
+        : 'voteOption_voteAgainst'
+  }
+
   static registryEntryChallenge(
     regEntryChallenge: ParamChange__loadRegistryEntryChallengeResult
   ): Entity {
@@ -103,11 +111,12 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setString('vote_voter', voterAddress.toHex())
     vote.setAddress('regEntry_address', registryEntryAddress)
     vote.setBytes('vote_secretHash', voteData.value0)
-    // vote.setString('vote_option', Helpers.voteOption(voteData.value1))
+    vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_amount', voteData.value2)
     vote.setU256('vote_revealedOn', voteData.value3)
     vote.setU256('vote_claimedRewardOn', voteData.value4)
     vote.setU256('vote_createdOn', event.params.timestamp)
+    vote.setString('vote_paramChange', registryEntryAddress.toHex())
     store.set('ParamChangeVote', voteId, vote)
   } else if (eventType == 'voteRevealed') {
     // Obtain the voter address
@@ -119,8 +128,9 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     let voteId = registryEntryAddress.toHex() + '-' + voterAddress.toHex()
     let vote = new Entity()
     vote.setAddress('vote_voter', voterAddress)
-    // vote.setString('vote_option', Helpers.voteOption(voteData.value1))
+    vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_revealedOn', voteData.value3)
+    vote.setString('vote_paramChange', registryEntryAddress.toHex())
     store.set('ParamChangeVote', voteId, vote)
 
     // Update the paramChange
