@@ -44,7 +44,19 @@ enum VoteOption {
   voteOption_voteAgainst
 }
 
-type Vote {
+# type Vote {
+#   id: ID!
+#   vote_createdOn: BigInt
+#   vote_secretHash: Bytes
+#   vote_option: VoteOption
+#   vote_amount: BigInt
+#   vote_revealedOn: BigInt
+#   vote_claimedRewardOn: BigInt
+#   # Jannis: Source?
+#   # vote_reward: Int
+# }
+
+type MemeVote {
   id: ID!
   vote_createdOn: BigInt
   vote_secretHash: Bytes
@@ -52,8 +64,17 @@ type Vote {
   vote_amount: BigInt
   vote_revealedOn: BigInt
   vote_claimedRewardOn: BigInt
-  # Jannis: Source?
-  # vote_reward: Int
+
+}
+
+type ParamChangeVote {
+  id: ID!
+  vote_createdOn: BigInt
+  vote_secretHash: Bytes
+  vote_option: VoteOption
+  vote_amount: BigInt
+  vote_revealedOn: BigInt
+  vote_claimedRewardOn: BigInt
 }
 
 type Meme implements RegEntry {

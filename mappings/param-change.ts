@@ -108,7 +108,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setU256('vote_revealedOn', voteData.value3)
     vote.setU256('vote_claimedRewardOn', voteData.value4)
     vote.setU256('vote_createdOn', event.params.timestamp)
-    store.set('Vote', voteId, vote)
+    store.set('ParamChangeVote', voteId, vote)
   } else if (eventType == 'voteRevealed') {
     // Obtain the voter address
     let eventData = event.params.data
@@ -121,7 +121,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     vote.setAddress('vote_voter', voterAddress)
     // vote.setString('vote_option', Helpers.voteOption(voteData.value1))
     vote.setU256('vote_revealedOn', voteData.value3)
-    store.set('Vote', voteId, vote)
+    store.set('ParamChangeVote', voteId, vote)
 
     // Update the paramChange
     let paramChange = Helpers.registryEntryChallenge(challengeData)
