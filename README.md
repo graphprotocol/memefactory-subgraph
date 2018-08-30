@@ -45,10 +45,8 @@ graph-node                             \
 
 ## TODO
 
-1. Complete the `ParamChangeRegistry` mapping
-2. Identify if there are other contracts/events we should watch
-3. Identify missing features
-4. Share and discuss schema and the subgraph in general with the District0x team
+1. Identify if there are other contracts/events we should watch
+1. Identify how to handle remaining types and fields (see questions in GraphQL schema)
 
 ## Missing features already identified
 
@@ -98,7 +96,7 @@ This subgraph manifest is based on the following MemeFactory resources:
     challenge_claimedRewardOn
     challenge_revealPeriodEnd
   }
-  votes {
+  memeVotes {
     id
     vote_option
     vote_amount
@@ -106,6 +104,12 @@ This subgraph manifest is based on the following MemeFactory resources:
     vote_secretHash
     vote_revealedOn
     vote_claimedRewardOn
+    vote_meme {
+      id
+      challenge_votes {
+        id
+      }
+    }
   }
   paramChanges {
     id
