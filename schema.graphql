@@ -64,7 +64,7 @@ type MemeVote {
   vote_amount: BigInt
   vote_revealedOn: BigInt
   vote_claimedRewardOn: BigInt
-  vote_meme: String
+  vote_meme: Meme
 
 }
 
@@ -76,6 +76,7 @@ type ParamChangeVote {
   vote_amount: BigInt
   vote_revealedOn: BigInt
   vote_claimedRewardOn: BigInt
+  vote_paramChange: ParamChange
 }
 
 type Meme implements RegEntry {
@@ -99,7 +100,7 @@ type Meme implements RegEntry {
   challenge_votesAgainst: BigInt
   challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
-  challenge_votes: @derivedFrom(field: "vote_meme")
+  challenge_votes: [MemeVote!] @derivedFrom(field: "vote_meme")
 
   # Jannis: How to represent?
   # challenge_availableVoteAmount(voter: ID!): BigInt
@@ -184,8 +185,7 @@ type ParamChange implements RegEntry {
   challenge_votesAgainst: BigInt
   challenge_votesTotal: BigInt
   challenge_claimedRewardOn: String
-  # Jannis: How to represent?
-  # challenge_votes: [ChallengeVotes]
+  challenge_votes: [ParamChangeVote!] @derivedFrom(field: "vote_paramChange")
 
   paramChange_db: String
   paramChange_key: String
