@@ -44,18 +44,6 @@ enum VoteOption {
   voteOption_voteAgainst
 }
 
-# type Vote {
-#   id: ID!
-#   vote_createdOn: BigInt
-#   vote_secretHash: Bytes
-#   vote_option: VoteOption
-#   vote_amount: BigInt
-#   vote_revealedOn: BigInt
-#   vote_claimedRewardOn: BigInt
-#   # Jannis: Source?
-#   # vote_reward: Int
-# }
-
 type MemeVote {
   id: ID!
   vote_createdOn: BigInt
@@ -65,7 +53,6 @@ type MemeVote {
   vote_revealedOn: BigInt
   vote_claimedRewardOn: BigInt
   vote_meme: Meme
-
 }
 
 type ParamChangeVote {
@@ -79,7 +66,7 @@ type ParamChangeVote {
   vote_paramChange: ParamChange
 }
 
-type Meme implements RegEntry {
+type Meme implements RegEntry @entity {
   id: ID!
   regEntry_address: String
   regEntry_version: BigInt
@@ -164,7 +151,7 @@ type Meme implements RegEntry {
 #   memeAuction_memeToken: MemeToken
 # }
 
-type ParamChange implements RegEntry {
+type ParamChange implements RegEntry @entity {
   id: ID!
   regEntry_address: String
   regEntry_version: BigInt
@@ -195,7 +182,7 @@ type ParamChange implements RegEntry {
   paramChange_appliedOn: String
 }
 
-type User {
+type User @entity {
   id: ID!
   # Ethereum address of an user
   user_address: ID!
