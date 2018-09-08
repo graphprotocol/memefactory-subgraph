@@ -44,7 +44,7 @@ enum VoteOption {
   voteOption_voteAgainst
 }
 
-type MemeVote {
+type MemeVote @entity {
   id: ID!
   vote_createdOn: BigInt
   vote_secretHash: Bytes
@@ -55,7 +55,7 @@ type MemeVote {
   vote_meme: Meme
 }
 
-type ParamChangeVote {
+type ParamChangeVote @entity {
   id: ID!
   vote_createdOn: BigInt
   vote_secretHash: Bytes
