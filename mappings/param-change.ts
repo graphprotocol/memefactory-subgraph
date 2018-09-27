@@ -52,7 +52,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
   let eventType = event.params.eventType.toString()
 
   // Create an instance of the 'ParamChange' contract
-  let paramChangeContract = ParamChange.bind(registryEntryAddress, event.blockHash)
+  let paramChangeContract = ParamChange.bind(registryEntryAddress)
 
   // Obtain registry entry and paramChange data from the contract
   let paramChangeData = paramChangeContract.loadParamChange()
@@ -70,7 +70,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Create the new paramChange
     let paramChange = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.paramChange(paramChangeData),
+      Helpers.paramChange(paramChangeData)
     ])
     paramChange.setString('id', registryEntryAddress.toHex())
     paramChange.setAddress('regEntry_address', registryEntryAddress)
@@ -87,7 +87,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Update paramChange
     let paramChange = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.paramChange(paramChangeData),
+      Helpers.paramChange(paramChangeData)
     ])
     paramChange.setAddress('regEntry_address', registryEntryAddress)
     paramChange.setU256('challenge_createdOn', event.params.timestamp)
@@ -148,7 +148,7 @@ export function handleParamRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Update the paramChange
     let paramChange = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.paramChange(paramChangeData),
+      Helpers.paramChange(paramChangeData)
     ])
     store.set('ParamChange', registryEntryAddress.toHex(), paramChange)
   }
