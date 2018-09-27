@@ -23,7 +23,10 @@ class Helpers {
   static registryEntry(regEntry: Meme__loadRegistryEntryResult): Entity {
     let entity = new Entity()
     entity.setU256('regEntry_version', regEntry.value0)
-    entity.setString('regEntry_status', Helpers.registryEntryStatus(regEntry.value1))
+    entity.setString(
+      'regEntry_status',
+      Helpers.registryEntryStatus(regEntry.value1)
+    )
     entity.setString('regEntry_creator', regEntry.value2.toHex())
     entity.setU256('regEntry_deposit', regEntry.value3)
     entity.setU256('regEntry_challengePeriodEnd', regEntry.value4)
@@ -66,7 +69,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
   let eventType = event.params.eventType.toString()
 
   // Create an instance of the 'Meme' contract
-  let memeContract = Meme.bind(registryEntryAddress, event.blockHash)
+  let memeContract = Meme.bind(registryEntryAddress)
 
   // Obtain registry entry and meme data from the contract
   let memeData = memeContract.loadMeme()
@@ -84,7 +87,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Create the new meme
     let meme = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.meme(memeData),
+      Helpers.meme(memeData)
     ])
     meme.setString('id', registryEntryAddress.toHex())
     meme.setAddress('regEntry_address', registryEntryAddress)
@@ -101,7 +104,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Update meme
     let meme = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.meme(memeData),
+      Helpers.meme(memeData)
     ])
     meme.setAddress('regEntry_address', registryEntryAddress)
     meme.setU256('challenge_createdOn', event.params.timestamp)
@@ -162,7 +165,7 @@ export function handleMemeRegistryEntryEvent(event: RegistryEntryEvent): void {
     // Update the meme
     let meme = Helpers.registryEntry(entryData).merge([
       Helpers.registryEntryChallenge(challengeData),
-      Helpers.meme(memeData),
+      Helpers.meme(memeData)
     ])
     store.set('Meme', registryEntryAddress.toHex(), meme)
   }
